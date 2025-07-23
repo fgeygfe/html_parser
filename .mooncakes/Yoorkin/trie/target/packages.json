@@ -1,0 +1,53 @@
+{
+  "source_dir": "/Users/Zhuanz2/html_parser/.mooncakes/Yoorkin/trie",
+  "name": "Yoorkin/trie",
+  "packages": [
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/Yoorkin/trie",
+      "root": "Yoorkin/trie",
+      "rel": "",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/Yoorkin/trie/trie.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/Yoorkin/trie/trie_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/Yoorkin/trie/target/wasm-gc/release/check/trie.mi"
+    }
+  ],
+  "deps": [],
+  "backend": "wasm-gc",
+  "opt_level": "release",
+  "source": null
+}

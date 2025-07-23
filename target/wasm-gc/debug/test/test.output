@@ -1,0 +1,2 @@
+{"$message_type":"diagnostic","level":"warning","loc":{"path":"/Users/Zhuanz2/html_parser/src/lib/lexer/lexer.mbt","start":{"line":173,"col":4},"end":{"line":173,"col":19}},"message":"Warning: Unused function 'is_self_closing'","error_code":1}
+{"$message_type":"diagnostic","level":"warning","loc":{"path":"/Users/Zhuanz2/html_parser/src/lib/lexer/lexer.mbt","start":{"line":308,"col":4},"end":{"line":308,"col":20}},"message":"Warning: Unused function 'is_end_tag_start'","error_code":1}

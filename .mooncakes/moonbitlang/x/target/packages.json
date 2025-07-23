@@ -1,0 +1,1373 @@
+{
+  "source_dir": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x",
+  "name": "moonbitlang/x",
+  "packages": [
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/benchmark",
+      "root": "moonbitlang/x",
+      "rel": "benchmark",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/benchmark/types.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/benchmark/benchmark.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [
+        {
+          "path": "moonbitlang/x/benchmark/internal/ffi",
+          "alias": "ffi",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/benchmark/internal/ffi"
+        }
+      ],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/benchmark/benchmark.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/benchmark/internal/ffi",
+      "root": "moonbitlang/x",
+      "rel": "benchmark/internal/ffi",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/benchmark/internal/ffi/ffi_native.mbt": {
+          "backend": [
+            "Native"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/benchmark/internal/ffi/ffi_wasm.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/benchmark/internal/ffi/ffi_js.mbt": {
+          "backend": [
+            "Js"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/benchmark/internal/ffi/ffi.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto",
+      "root": "moonbitlang/x",
+      "rel": "crypto",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/sha256.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/chacha.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/sm3.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/sha224.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/md5.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/utils.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/sha1.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/sha1_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/sm3_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/sha224_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/sha256_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/chacha_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/crypto/md5_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/crypto/crypto.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/internal/ffi",
+      "root": "moonbitlang/x",
+      "rel": "internal/ffi",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/internal/ffi/dir_wasm.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/internal/ffi/string_convert.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/internal/ffi/string_wasm.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/internal/ffi/byte_array_wasm.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/internal/ffi/ffi.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/num",
+      "root": "moonbitlang/x",
+      "rel": "num",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/num/num.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/num/num.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding",
+      "root": "moonbitlang/x",
+      "rel": "encoding",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/encoding.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/decoding.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/types.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/decoding_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/encoding_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/encoding/encoding.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/internal/benchmark",
+      "root": "moonbitlang/x",
+      "rel": "encoding/internal/benchmark",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/internal/benchmark/lib.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [
+        {
+          "path": "moonbitlang/x/encoding",
+          "alias": "encoding",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding"
+        }
+      ],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/encoding/internal/benchmark/benchmark.mi"
+    },
+    {
+      "is-main": true,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/internal/benchmark/decoding_streaming",
+      "root": "moonbitlang/x",
+      "rel": "encoding/internal/benchmark/decoding_streaming",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/internal/benchmark/decoding_streaming/main.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [
+        {
+          "path": "moonbitlang/x/encoding",
+          "alias": "encoding",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding"
+        },
+        {
+          "path": "moonbitlang/x/sys",
+          "alias": "sys",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys"
+        },
+        {
+          "path": "moonbitlang/x/encoding/internal/benchmark",
+          "alias": "bench",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/internal/benchmark"
+        }
+      ],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/encoding/internal/benchmark/decoding_streaming/decoding_streaming.mi"
+    },
+    {
+      "is-main": true,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/internal/benchmark/decoding_batch",
+      "root": "moonbitlang/x",
+      "rel": "encoding/internal/benchmark/decoding_batch",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/internal/benchmark/decoding_batch/main.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [
+        {
+          "path": "moonbitlang/x/encoding",
+          "alias": "encoding",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding"
+        },
+        {
+          "path": "moonbitlang/x/sys",
+          "alias": "sys",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys"
+        },
+        {
+          "path": "moonbitlang/x/encoding/internal/benchmark",
+          "alias": "bench",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/encoding/internal/benchmark"
+        }
+      ],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/encoding/internal/benchmark/decoding_batch/decoding_batch.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time",
+      "root": "moonbitlang/x",
+      "rel": "time",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_date_time.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_date.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/errors.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/zone_offset.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/zoned_date_time.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/duration.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/period.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_time.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/util.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/weekday.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/zone.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_date_wbtest.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_time_wbtest.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_date_time_wbtest.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/duration_wbtest.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/zone_wbtest.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "test-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/zoned_date_time_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_date_time_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/zone_offset_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_time_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/period_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/plain_date_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/duration_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/time/zone_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/time/time.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys",
+      "root": "moonbitlang/x",
+      "rel": "sys",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys/sys.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys/sys_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "mbt-md-files": {},
+      "deps": [
+        {
+          "path": "moonbitlang/x/sys/internal/ffi",
+          "alias": "ffi",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys/internal/ffi"
+        }
+      ],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/sys/sys.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys/internal/ffi",
+      "root": "moonbitlang/x",
+      "rel": "sys/internal/ffi",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys/internal/ffi/sys_wasm.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys/internal/ffi/sys_js.mbt": {
+          "backend": [
+            "Js"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/sys/internal/ffi/sys_native.mbt": {
+          "backend": [
+            "Native"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [
+        {
+          "path": "moonbitlang/x/internal/ffi",
+          "alias": "ffi",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/internal/ffi"
+        }
+      ],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/sys/internal/ffi/ffi.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5",
+      "root": "moonbitlang/x",
+      "rel": "json5",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/lex_misc.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/lex_number.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/unicode_gen.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/lex_prop.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/lex_string.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/parse.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/util.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/types.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/internal_types.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/lex_main.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/parse_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/json5/parse_error_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/json5/json5.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/stack",
+      "root": "moonbitlang/x",
+      "rel": "stack",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/stack/types.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/stack/stack.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {},
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/stack/stack.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/fs",
+      "root": "moonbitlang/x",
+      "rel": "fs",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/fs/fs.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/fs/fs_js.mbt": {
+          "backend": [
+            "Js"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/fs/fs_native.mbt": {
+          "backend": [
+            "Native"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/fs/fs_wasm.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC"
+          ],
+          "optlevel": [
+            "Release",
+            "Debug"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/fs/blackbox_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "mbt-md-files": {},
+      "deps": [
+        {
+          "path": "moonbitlang/x/internal/ffi",
+          "alias": "ffi",
+          "fspath": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/internal/ffi"
+        }
+      ],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/fs/fs.mi"
+    },
+    {
+      "is-main": false,
+      "is-third-party": false,
+      "root-path": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/uuid",
+      "root": "moonbitlang/x",
+      "rel": "uuid",
+      "files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/uuid/variant.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/uuid/uuid.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/uuid/ops.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "wbtest-files": {},
+      "test-files": {
+        "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/uuid/uuid_test.mbt": {
+          "backend": [
+            "Wasm",
+            "WasmGC",
+            "Js",
+            "Native",
+            "LLVM"
+          ],
+          "optlevel": [
+            "Debug",
+            "Release"
+          ]
+        }
+      },
+      "mbt-md-files": {},
+      "deps": [],
+      "wbtest-deps": [],
+      "test-deps": [],
+      "artifact": "/Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/x/target/wasm-gc/release/check/uuid/uuid.mi"
+    }
+  ],
+  "deps": [],
+  "backend": "wasm-gc",
+  "opt_level": "release",
+  "source": null
+}

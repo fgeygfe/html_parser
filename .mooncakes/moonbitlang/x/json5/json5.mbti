@@ -1,0 +1,31 @@
+package moonbitlang/x/json5
+
+// Values
+fn parse(String) -> Json!ParseError
+
+// Types and methods
+pub(all) type! ParseError ParseErrorData
+impl ParseError {
+  to_string(Self) -> String
+}
+impl Show for ParseError
+
+pub(all) enum ParseErrorData {
+  InvalidChar(Position, Char)
+  InvalidEof
+  InvalidNumber(Position, String)
+  InvalidIdentEscape(Position)
+}
+impl Eq for ParseErrorData
+
+pub(all) struct Position {
+  line : Int
+  column : Int
+}
+impl Eq for Position
+impl Show for Position
+
+// Type aliases
+
+// Traits
+
