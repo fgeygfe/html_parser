@@ -11,13 +11,8 @@ typealias @moonbitlang/core/builtin.Map[
 ] as Moonbit_Test_Driver_Internal_No_Args_Map
 
 let moonbit_test_driver_internal_no_args_tests : Moonbit_Test_Driver_Internal_No_Args_Map = {
-  "parser_test.mbt": {
-    0: (__test_7061727365725f746573742e6d6274_0, ["dom_tree_builder"]),
-    1: (__test_7061727365725f746573742e6d6274_1, ["complex_dom_parsing"]),
-    2: (__test_7061727365725f746573742e6d6274_2, ["simple_dom_structure"]),
-    3: (__test_7061727365725f746573742e6d6274_3, ["nested_dom_structure"]),
-    4: (__test_7061727365725f746573742e6d6274_4, ["self_closing_tags_dom"]),
-    5: (__test_7061727365725f746573742e6d6274_5, ["dom_with_comments"]),
+  "dom_query_test.mbt": {
+    0: (__test_646f6d5f71756572795f746573742e6d6274_0, ["test_query_dom_by_tag_name"]),
   },
 }
 
@@ -62,7 +57,7 @@ pub fn moonbit_test_driver_internal_execute(filename: MoonbitTestDriverInternalE
   let message = message.escape()
   @moonbitlang/core/builtin.println("----- BEGIN MOON TEST RESULT -----")
   @moonbitlang/core/builtin.println(
-    "{\"package\": \"html_parser/lib/parser\", \"filename\": \{file_name}, \"index\": \"\{index}\", \"test_name\": \{test_name}, \"message\": \{message}}",
+    "{\"package\": \"html_parser/lib/dom\", \"filename\": \{file_name}, \"index\": \"\{index}\", \"test_name\": \{test_name}, \"message\": \{message}}",
   )
   @moonbitlang/core/builtin.println("----- END MOON TEST RESULT -----")
 }

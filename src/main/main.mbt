@@ -3,4 +3,11 @@ fn main {
   let result = @parser.parse_dom(tokens)
   println("\nDOM Tree:")
   @parser.print_dom_tree(result)
+  let h1_nodes = @dom.query_dom_by_tag_name([result], "h1")
+  println("\nAll <h1> nodes:")
+  let mut i = 0
+  while i < h1_nodes.length() {
+    @parser.print_dom_tree(h1_nodes[i])
+    i = i + 1
+  }
 }

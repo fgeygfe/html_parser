@@ -3,7 +3,7 @@
 
 /// DOM node type definition.
 /// Represents a node in the DOM tree, which can be an element, text, or comment.
-pub enum DomNode {
+pub(all) enum DomNode {
   /// Element node, contains tag name and child nodes.
   Element(String, Array[DomNode])
   /// Text node, contains text content.

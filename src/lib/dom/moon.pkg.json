@@ -1,0 +1,7 @@
+{
+  "is-main": false,
+  "import": [
+    "html_parser/lib/parser"
+  ]
+}
+

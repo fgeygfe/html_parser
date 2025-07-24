@@ -2,6 +2,7 @@
   "is-main": true,
   "import": [
     "html_parser/lib/lexer",
-    "html_parser/lib/parser"
+    "html_parser/lib/parser",
+    "html_parser/lib/dom"
   ]
 }
