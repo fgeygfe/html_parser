@@ -13,10 +13,10 @@
 // limitations under the License.
 
 ///|
-pub type! MalformedError Bytes
+pub suberror MalformedError Bytes
 
 ///|
-pub type! TruncatedError Bytes
+pub suberror TruncatedError Bytes
 
 ///|
 pub(all) enum Encoding {
@@ -29,7 +29,7 @@ pub(all) enum Encoding {
 // Decoder
 
 ///|
-typealias Cont = (Decoder) -> Decode
+priv type Cont (Decoder) -> Decode
 
 ///|
 struct Decoder {
@@ -63,6 +63,12 @@ priv enum Decode {
   Malformed(Bytes)
   Uchar(Char)
 } derive(Show)
+
+///|
+test {
+  // make unused warning happy
+  inspect(End.to_string(), content="End")
+}
 
 // helper constructor
 

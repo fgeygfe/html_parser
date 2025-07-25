@@ -58,7 +58,7 @@ extern "js" fn get_error_message_ffi() -> String =
   #| }
 
 ///|
-fn read_file_to_bytes_internal(path : String) -> Bytes! {
+fn read_file_to_bytes_internal(path : String) -> Bytes raise IOError {
   let res = read_file_ffi(path)
   if res == -1 {
     raise IOError(get_error_message_ffi())
@@ -70,18 +70,21 @@ fn read_file_to_bytes_internal(path : String) -> Bytes! {
 fn read_file_to_string_internal(
   path : String,
   encoding~ : String = "utf8"
-) -> String! {
+) -> String raise IOError {
   guard encoding == "utf8" else {
     raise IOError(
       "Unsupported encoding: \{encoding}, only utf8 is supported for now",
     )
   }
-  let bytes = read_file_to_bytes_internal!(path)
+  let bytes = read_file_to_bytes_internal(path)
   @ffi.utf8_bytes_to_mbt_string(bytes)
 }
 
 ///|
-fn write_bytes_to_file_internal(path : String, content : Bytes) -> Unit! {
+fn write_bytes_to_file_internal(
+  path : String,
+  content : Bytes
+) -> Unit raise IOError {
   let res = write_file_ffi(path, content)
   if res == -1 {
     raise IOError(get_error_message_ffi())
@@ -93,14 +96,14 @@ fn write_string_to_file_internal(
   path : String,
   content : String,
   encoding~ : String = "utf8"
-) -> Unit! {
+) -> Unit raise IOError {
   guard encoding == "utf8" else {
     raise IOError(
       "Unsupported encoding: \{encoding}, only utf8 is supported for now",
     )
   }
   let bytes = @ffi.mbt_string_to_utf8_bytes(content, false)
-  write_bytes_to_file_internal!(path, bytes)
+  write_bytes_to_file_internal(path, bytes)
 }
 
 ///|
@@ -130,7 +133,7 @@ extern "js" fn read_dir_ffi(path : String) -> Int =
   #| }
 
 ///|
-fn read_dir_internal(path : String) -> Array[String]! {
+fn read_dir_internal(path : String) -> Array[String] raise IOError {
   let res = read_dir_ffi(path)
   if res == -1 {
     raise IOError(get_error_message_ffi())
@@ -152,7 +155,7 @@ extern "js" fn create_dir_ffi(path : String) -> Int =
   #| }
 
 ///|
-fn create_dir_internal(path : String) -> Unit! {
+fn create_dir_internal(path : String) -> Unit raise IOError {
   let res = create_dir_ffi(path)
   if res == -1 {
     raise IOError(get_error_message_ffi())
@@ -173,7 +176,7 @@ extern "js" fn is_dir_ffi(path : String) -> Int =
   #| }
 
 ///|
-fn is_dir_internal(path : String) -> Bool! {
+fn is_dir_internal(path : String) -> Bool raise IOError {
   let res = is_dir_ffi(path)
   if res == -1 {
     raise IOError(get_error_message_ffi())
@@ -195,7 +198,7 @@ extern "js" fn is_file_ffi(path : String) -> Int =
   #| }
 
 ///|
-fn is_file_internal(path : String) -> Bool! {
+fn is_file_internal(path : String) -> Bool raise IOError {
   let res = is_file_ffi(path)
   if res == -1 {
     raise IOError(get_error_message_ffi())
@@ -217,7 +220,7 @@ extern "js" fn remove_dir_ffi(path : String) -> Int =
   #| }
 
 ///|
-fn remove_dir_internal(path : String) -> Unit! {
+fn remove_dir_internal(path : String) -> Unit raise IOError {
   let res = remove_dir_ffi(path)
   if res == -1 {
     raise IOError(get_error_message_ffi())
@@ -238,7 +241,7 @@ extern "js" fn remove_file_ffi(path : String) -> Int =
   #| }
 
 ///|
-fn remove_file_internal(path : String) -> Unit! {
+fn remove_file_internal(path : String) -> Unit raise IOError {
   let res = remove_file_ffi(path)
   if res == -1 {
     raise IOError(get_error_message_ffi())

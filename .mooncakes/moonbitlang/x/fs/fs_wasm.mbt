@@ -13,13 +13,13 @@
 // limitations under the License.
 
 ///|
-typealias XExternString = @ffi.XExternString
+typealias @ffi.XExternString
 
 ///|
-typealias XExternByteArray = @ffi.XExternByteArray
+typealias @ffi.XExternByteArray
 
 ///|
-typealias XExternStringArray = @ffi.XExternStringArray
+typealias @ffi.XExternStringArray
 
 ///|
 fn get_error_message_ffi() -> XExternString = "__moonbit_fs_unstable" "get_error_message"
@@ -45,7 +45,7 @@ fn write_bytes_to_file_ffi(
 ) -> Int = "__moonbit_fs_unstable" "write_bytes_to_file_new"
 
 ///|
-fn read_file_to_bytes_internal(path : String) -> Bytes! {
+fn read_file_to_bytes_internal(path : String) -> Bytes raise IOError {
   let res = read_file_to_bytes_ffi(@ffi.string_to_extern(path))
   guard res != -1 else { raise IOError(get_error_message()) }
   @ffi.byte_array_from_extern(get_file_content_ffi())
@@ -55,23 +55,25 @@ fn read_file_to_bytes_internal(path : String) -> Bytes! {
 fn read_file_to_string_internal(
   path : String,
   encoding~ : String = "utf8"
-) -> String! {
+) -> String raise IOError {
   guard encoding == "utf8" else {
     raise IOError(
       "Unsupported encoding: \{encoding}, only utf8 is supported for now",
     )
   }
-  @ffi.utf8_bytes_to_mbt_string(read_file_to_bytes_internal!(path))
+  @ffi.utf8_bytes_to_mbt_string(read_file_to_bytes_internal(path))
 }
 
 ///|
-fn write_bytes_to_file_internal(path : String, content : Bytes) -> Unit! {
+fn write_bytes_to_file_internal(
+  path : String,
+  content : Bytes
+) -> Unit raise IOError {
   let res = write_bytes_to_file_ffi(
     @ffi.string_to_extern(path),
     @ffi.byte_array_to_extern(content),
   )
   guard res != -1 else { raise IOError(get_error_message()) }
-
 }
 
 ///|
@@ -79,13 +81,13 @@ fn write_string_to_file_internal(
   path : String,
   content : String,
   encoding~ : String = "utf8"
-) -> Unit! {
+) -> Unit raise IOError {
   guard encoding == "utf8" else {
     raise IOError(
       "Unsupported encoding: \{encoding}, only utf8 is supported for now",
     )
   }
-  write_bytes_to_file_internal!(
+  write_bytes_to_file_internal(
     path,
     @ffi.mbt_string_to_utf8_bytes(content, false),
   )
@@ -103,17 +105,16 @@ fn path_exists_internal(path : String) -> Bool {
 fn create_dir_ffi(path : XExternString) -> Int = "__moonbit_fs_unstable" "create_dir_new"
 
 ///|
-fn create_dir_internal(path : String) -> Unit! {
+fn create_dir_internal(path : String) -> Unit raise IOError {
   let res = create_dir_ffi(@ffi.string_to_extern(path))
   guard res != -1 else { raise IOError(get_error_message()) }
-
 }
 
 ///|
 fn read_dir_ffi(path : XExternString) -> Int = "__moonbit_fs_unstable" "read_dir_new"
 
 ///|
-fn read_dir_internal(path : String) -> Array[String]! {
+fn read_dir_internal(path : String) -> Array[String] raise IOError {
   let res = read_dir_ffi(@ffi.string_to_extern(path))
   guard res != -1 else { raise IOError(get_error_message()) }
   @ffi.string_array_from_extern(get_dir_files_ffi())
@@ -123,7 +124,7 @@ fn read_dir_internal(path : String) -> Array[String]! {
 fn is_file_ffi(path : XExternString) -> Int = "__moonbit_fs_unstable" "is_file_new"
 
 ///|
-fn is_file_internal(path : String) -> Bool! {
+fn is_file_internal(path : String) -> Bool raise IOError {
   let res = is_file_ffi(@ffi.string_to_extern(path))
   guard res != -1 else { raise IOError(get_error_message()) }
   res == 1
@@ -133,7 +134,7 @@ fn is_file_internal(path : String) -> Bool! {
 fn is_dir_ffi(path : XExternString) -> Int = "__moonbit_fs_unstable" "is_dir_new"
 
 ///|
-fn is_dir_internal(path : String) -> Bool! {
+fn is_dir_internal(path : String) -> Bool raise IOError {
   let res = is_dir_ffi(@ffi.string_to_extern(path))
   guard res != -1 else { raise IOError(get_error_message()) }
   res == 1
@@ -143,18 +144,16 @@ fn is_dir_internal(path : String) -> Bool! {
 fn remove_file_ffi(path : XExternString) -> Int = "__moonbit_fs_unstable" "remove_file_new"
 
 ///|
-fn remove_file_internal(path : String) -> Unit! {
+fn remove_file_internal(path : String) -> Unit raise IOError {
   let res = remove_file_ffi(@ffi.string_to_extern(path))
   guard res != -1 else { raise IOError(get_error_message()) }
-
 }
 
 ///|
 fn remove_dir_ffi(path : XExternString) -> Int = "__moonbit_fs_unstable" "remove_dir_new"
 
 ///|
-fn remove_dir_internal(path : String) -> Unit! {
+fn remove_dir_internal(path : String) -> Unit raise IOError {
   let res = remove_dir_ffi(@ffi.string_to_extern(path))
   guard res != -1 else { raise IOError(get_error_message()) }
-
 }

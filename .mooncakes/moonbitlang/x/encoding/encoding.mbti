@@ -1,29 +1,20 @@
-package moonbitlang/x/encoding
+package "moonbitlang/x/encoding"
 
-alias @moonbitlang/core/buffer as @buffer
+import(
+  "moonbitlang/core/buffer"
+  "moonbitlang/core/bytes"
+)
 
 // Values
 const U_REP : Char = '�'
 
-fn consume(Decoder, Bytes) -> String!
-
-fn decode(Decoder, Bytes, stream~ : Bool = ..) -> String!
-
-fn decode_lossy(Decoder, Bytes, stream~ : Bool = ..) -> String
-
-fn decode_to(Bytes, StringBuilder, encoding~ : Encoding) -> Unit!
+fn decode_to(@bytes.View, StringBuilder, encoding~ : Encoding) -> Unit raise
 
 fn decoder(Encoding) -> Decoder
 
 fn encode(Encoding, String) -> Bytes
 
 fn encode_to(String, @buffer.T, encoding~ : Encoding) -> Unit
-
-fn finish(Decoder) -> String!
-
-fn lossy_consume(Decoder, Bytes) -> String
-
-fn lossy_finish(Decoder) -> String
 
 fn to_utf16_bytes(Char) -> Bytes
 
@@ -43,16 +34,14 @@ fn write_utf8_char(@buffer.T, Char) -> Unit
 
 // Types and methods
 type Decoder
-impl Decoder {
-  consume(Self, Bytes) -> String!
-  decode(Self, Bytes, stream~ : Bool = ..) -> String!
-  decode_lossy(Self, Bytes, stream~ : Bool = ..) -> String
-  decode_lossy_to(Self, Bytes, StringBuilder, stream~ : Bool = ..) -> Unit
-  decode_to(Self, Bytes, StringBuilder, stream~ : Bool = ..) -> Unit!
-  finish(Self) -> String!
-  lossy_consume(Self, Bytes) -> String
-  lossy_finish(Self) -> String
-}
+fn Decoder::consume(Self, @bytes.View) -> String raise
+fn Decoder::decode(Self, @bytes.View, stream~ : Bool = ..) -> String raise
+fn Decoder::decode_lossy(Self, @bytes.View, stream~ : Bool = ..) -> String
+fn Decoder::decode_lossy_to(Self, @bytes.View, StringBuilder, stream~ : Bool = ..) -> Unit
+fn Decoder::decode_to(Self, @bytes.View, StringBuilder, stream~ : Bool = ..) -> Unit raise
+fn Decoder::finish(Self) -> String raise
+fn Decoder::lossy_consume(Self, @bytes.View) -> String
+fn Decoder::lossy_finish(Self) -> String
 
 pub(all) enum Encoding {
   UTF8
@@ -61,9 +50,9 @@ pub(all) enum Encoding {
   UTF16BE
 }
 
-pub type! MalformedError Bytes
+pub suberror MalformedError Bytes
 
-pub type! TruncatedError Bytes
+pub suberror TruncatedError Bytes
 
 // Type aliases
 

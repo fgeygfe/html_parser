@@ -1,13 +1,11 @@
-package moonbitlang/x/json5
+package "moonbitlang/x/json5"
 
 // Values
-fn parse(String) -> Json!ParseError
+fn parse(String) -> Json raise ParseError
 
 // Types and methods
-pub(all) type! ParseError ParseErrorData
-impl ParseError {
-  to_string(Self) -> String
-}
+pub(all) suberror ParseError ParseErrorData
+fn ParseError::to_string(Self) -> String
 impl Show for ParseError
 
 pub(all) enum ParseErrorData {

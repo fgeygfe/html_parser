@@ -13,51 +13,51 @@
 // limitations under the License.
 
 ///|
-pub fn parse(input : String) -> @json.JsonValue!ParseError {
+pub fn parse(input : String) -> Json raise ParseError {
   let ctx = ParseContext::make(input)
-  let val = parse_value!(ctx)
-  lex_skip_whitespace!(ctx)
+  let val = parse_value(ctx)
+  lex_skip_whitespace(ctx)
   if ctx.offset >= ctx.end_offset {
     val
   } else {
-    invalid_char!(ctx)
+    invalid_char(ctx)
   }
 }
 
 ///|
-fn parse_value(ctx : ParseContext) -> @json.JsonValue!ParseError {
-  let tok = lex_value!(ctx)
-  parse_value2!(ctx, tok)
+fn parse_value(ctx : ParseContext) -> Json raise ParseError {
+  let tok = lex_value(ctx)
+  parse_value2(ctx, tok)
 }
 
 ///|
-fn parse_value2(ctx : ParseContext, tok : Token) -> @json.JsonValue!ParseError {
+fn parse_value2(ctx : ParseContext, tok : Token) -> Json raise ParseError {
   match tok {
-    Null => Null
-    True => True
-    False => False
-    Number(n) => Number(n)
-    String(s) => String(s)
-    LBrace => parse_object!(ctx)
-    LBracket => parse_array!(ctx)
+    Null => Json::null()
+    True => Json::boolean(true)
+    False => Json::boolean(false)
+    Number(n) => Json::number(n)
+    String(s) => Json::string(s)
+    LBrace => parse_object(ctx)
+    LBracket => parse_array(ctx)
     _ => abort("unreachable")
   }
 }
 
 ///|
-fn parse_object(ctx : ParseContext) -> @json.JsonValue!ParseError {
+fn parse_object(ctx : ParseContext) -> Json raise ParseError {
   let map = Map::new()
   for {
-    let tok = lex_property_name!(ctx)
+    let tok = lex_property_name(ctx)
     match tok {
       RBrace => break
       String(name) => {
-        let tok2 = lex_after_property_name!(ctx)
+        let tok2 = lex_after_property_name(ctx)
         match tok2 {
           Colon => {
-            let val = parse_value!(ctx)
+            let val = parse_value(ctx)
             map.set(name, val)
-            let tok3 = lex_after_object_value!(ctx)
+            let tok3 = lex_after_object_value(ctx)
             match tok3 {
               Comma => continue
               RBrace => break
@@ -70,19 +70,19 @@ fn parse_object(ctx : ParseContext) -> @json.JsonValue!ParseError {
       _ => abort("unreachable")
     }
   }
-  Object(map)
+  Json::object(map)
 }
 
 ///|
-fn parse_array(ctx : ParseContext) -> @json.JsonValue!ParseError {
+fn parse_array(ctx : ParseContext) -> Json raise ParseError {
   let vec = []
   for {
-    let tok = lex_value!(ctx, allow_rbracket=true)
+    let tok = lex_value(ctx, allow_rbracket=true)
     match tok {
       RBracket => break
       _ => {
-        vec.push(parse_value2!(ctx, tok))
-        let tok2 = lex_after_array_value!(ctx)
+        vec.push(parse_value2(ctx, tok))
+        let tok2 = lex_after_array_value(ctx)
         match tok2 {
           Comma => continue
           RBracket => break
@@ -91,5 +91,5 @@ fn parse_array(ctx : ParseContext) -> @json.JsonValue!ParseError {
       }
     }
   }
-  Array(vec)
+  Json::array(vec)
 }

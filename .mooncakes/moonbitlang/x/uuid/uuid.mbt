@@ -22,15 +22,15 @@
 /// # Usage
 ///
 /// ```moonbit
-/// let u = @uuid.from_hex("ddf99703-742f-7505-4c54-df36a9c243fe")
-/// let u2 = @uuid.from_bytes(Bytes.of([221, 249, 151, 3, 116, 47, 117, 5, 76, 84, 223, 54, 169, 194, 67, 254]))
-/// // assert_eq(u, u2) should be true
+/// let u1 = @uuid.from_hex("ddf99703-742f-7505-4c54-df36a9c243fe")
+/// let u2 = @uuid.from_bytes(@bytes.of([221, 249, 151, 3, 116, 47, 117, 5, 76, 84, 223, 54, 169, 194, 67, 254]))
+/// assert_eq(u1, u2)
 /// ```
 ///
 /// Construct an RFC-4122-compliant v4 UUID:
 ///
 /// ```moonbit
-/// let u = @uuid
+/// let _u = @uuid
 ///   .from_hex("9558cfadb48547c70f9adf1f75cdef29")
 ///   .as_version(@uuid.V4)
 /// ```
@@ -46,9 +46,9 @@ struct UUID {
 ///
 /// The produced UUID is not RFC-4122 compliant; see also `as_version()`.
 ///
-pub fn from_bytes(bytes : Bytes) -> UUID!Error {
+pub fn from_bytes(bytes : Bytes) -> UUID raise Error {
   if bytes.length() != 16 {
-    fail!("requires 16 bytes")
+    fail("requires 16 bytes")
   }
   // XXX: this is ideally Int64::from_bytes() (needs a cheap slicing method)
   let hi = for rv = 0L, i = 0; i < 8; {
@@ -84,26 +84,26 @@ test "bytes" {
       Int::to_byte,
     ),
   )
-  inspect!(
-    from_bytes!(buf).to_bytes(),
-    content=
+  inspect(
+    from_bytes(buf).to_bytes(),
+    content=(
       #|b"\xc9\x82\xfb\x68\xdf\x50\x4c\xa1\x91\xf8\xba\xa2\x04\x09\xe5\xb9"
-    ,
+    ),
   )
-  assert_true!(from_bytes?(Bytes::new(15)).is_err())
-  assert_true!(from_bytes?(Bytes::new(17)).is_err())
+  assert_true((try? from_bytes(Bytes::new(15))).is_err())
+  assert_true((try? from_bytes(Bytes::new(17))).is_err())
 }
 
 ///|
-fn hex_char_to_int64(c : Char) -> Int64!Error {
-  let d = if '0' <= c && c <= '9' {
-    c.to_int() - '0'.to_int()
-  } else if 'a' <= c && c <= 'f' {
-    c.to_int() - 'a'.to_int() + 10
-  } else if 'A' <= c && c <= 'F' {
-    c.to_int() - 'A'.to_int() + 10
+fn hex_char_to_int64(c : Int) -> Int64 raise Error {
+  let d = if '0'.to_int() <= c && c <= '9'.to_int() {
+    c - '0'
+  } else if 'a'.to_int() <= c && c <= 'f'.to_int() {
+    c - 'a' + 10
+  } else if 'A'.to_int() <= c && c <= 'F'.to_int() {
+    c - 'A' + 10
   } else {
-    fail!("invalid syntax")
+    fail("invalid syntax")
   }
   d.to_int64()
 }
@@ -113,18 +113,18 @@ fn hex_char_to_int64(c : Char) -> Int64!Error {
 /// This function ignores dashes (`-`) in the given string. The remaining
 /// letters must be exactly 32 hexadecimals, or an error will be raised.
 ///
-pub fn from_hex(hex : String) -> UUID!Error {
+pub fn from_hex(hex : String) -> UUID raise Error {
   // XXX: ideally we should use strconv here, but we don't have sufficient
   // tooling around String yet
   let (hi, i) = for hi = 0L, i = 0, n = 0; n < 16; {
     if i >= hex.length() {
-      fail!("not enough hexadecimal in UUID string")
+      fail("not enough hexadecimal in UUID string")
     }
-    let c = hex[i]
+    let c = hex.charcode_at(i)
     if c == '-' {
       continue hi, i + 1, n
     } else {
-      let d = hex_char_to_int64!(c)
+      let d = hex_char_to_int64(c)
       continue hi | (d << ((15 - n) * 4)), i + 1, n + 1
     }
   } else {
@@ -132,13 +132,13 @@ pub fn from_hex(hex : String) -> UUID!Error {
   }
   let (lo, i) = for lo = 0L, i = i, n = 0; n < 16; {
     if i >= hex.length() {
-      fail!("not enough hexadecimal in UUID string")
+      fail("not enough hexadecimal in UUID string")
     }
-    let c = hex[i]
+    let c = hex.charcode_at(i)
     if c == '-' {
       continue lo, i + 1, n
     } else {
-      let d = hex_char_to_int64!(c)
+      let d = hex_char_to_int64(c)
       continue lo | (d << ((15 - n) * 4)), i + 1, n + 1
     }
   } else {
@@ -147,14 +147,12 @@ pub fn from_hex(hex : String) -> UUID!Error {
   if i == hex.length() {
     { hi, lo }
   } else {
-    fail!("badly formed hexadecimal UUID string")
+    fail("badly formed hexadecimal UUID string")
   }
 }
 
 ///|
-let hex_table : Array[Int] = "0123456789abcdef"
-  .to_array()
-  .map(fn { c => c.to_int() })
+let hex_table : Array[Int] = "0123456789abcdef".to_array().map(c => c.to_int())
 
 ///|
 let dash : Int = '-'.to_int()
@@ -163,9 +161,10 @@ let dash : Int = '-'.to_int()
 let segments = [8, 4, 4, 0, 4, 12]
 
 // XXX: use sum() instead; weird `moon fmt`
+
 ///|
 let size : Int = (
-    segments.fold(fn { acc, x => acc + x }, init=0) + segments.length() - 2
+    segments.fold((acc, x) => acc + x, init=0) + segments.length() - 2
   ) *
   2
 

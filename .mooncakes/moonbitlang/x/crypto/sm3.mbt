@@ -54,6 +54,7 @@ let t : FixedArray[UInt] = [ // pre calculated
 // auxiliary functions
 // FF_j = | X xor Y xor Z                       where 0 <= j <= 15
 //        | (X and Y) or (X and Z) or (Y and Z) where 16 <= j <=63
+
 ///|
 fn SM3Context::ff_0(x : UInt, y : UInt, z : UInt) -> UInt {
   x ^ y ^ z
@@ -66,6 +67,7 @@ fn SM3Context::ff_1(x : UInt, y : UInt, z : UInt) -> UInt {
 
 // GG_j = | X xor Y xor Z           where 0 <= j <= 15
 //        | (X and Y) or (~X and Z) where 16 <= j <= 63
+
 ///|
 fn SM3Context::gg_0(x : UInt, y : UInt, z : UInt) -> UInt {
   x ^ y ^ z
@@ -78,6 +80,7 @@ fn SM3Context::gg_1(x : UInt, y : UInt, z : UInt) -> UInt {
 
 // P_0 = X xor (X <<< 9) xor (X <<< 17)
 // P_1 = X xor (X <<< 15) xor (X <<< 23)
+
 ///|
 fn SM3Context::p_0(x : UInt) -> UInt {
   x ^ rotate_left_u(x, 9) ^ rotate_left_u(x, 17)
@@ -279,7 +282,7 @@ test {
     ctx.sm3_compute()
   }
 
-  inspect!(
+  inspect(
     uints_to_hex_string(
       sm3_u32(
         b"\x61\x62\x63".to_fixedarray(), // abc in utf-8
@@ -287,7 +290,7 @@ test {
     ),
     content="66c7f0f462eeedd9d1f2d46bdc10e4e24167c4875cf2f7a2297da02b8f4ba8e0",
   )
-  inspect!(
+  inspect(
     uints_to_hex_string(
       sm3_u32(
         // abcd * 16 in utf-8
@@ -296,7 +299,7 @@ test {
     ),
     content="debe9ff92275b8a138604889c18e5a4d6fdb70e5387e5765293dcba39c0c5732",
   )
-  assert_eq!(
+  assert_eq(
     bytes_to_hex_string(sm3(b"\x61\x62\x63".to_fixedarray())),
     uints_to_hex_string(sm3_u32(b"\x61\x62\x63".to_fixedarray()).iter()),
   )
@@ -305,13 +308,13 @@ test {
   ctx.update(b"\x61".to_fixedarray())
   ctx.update(b"\x62".to_fixedarray())
   ctx.update(b"\x63".to_fixedarray())
-  assert_eq!(hash1, bytes_to_hex_string(ctx.finalize()))
+  assert_eq(hash1, bytes_to_hex_string(ctx.finalize()))
   let ctx = SM3Context::new()
   let data = b"\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64\x61\x62\x63\x64"
   for i = 0; i < data.length(); i = i + 1 {
     ctx.update(FixedArray::make(1, data[i]))
   }
-  assert_eq!(
+  assert_eq(
     bytes_to_hex_string(ctx.finalize()),
     "debe9ff92275b8a138604889c18e5a4d6fdb70e5387e5765293dcba39c0c5732",
   )
@@ -319,7 +322,7 @@ test {
   for i = 0; i < data.length(); i = i + 4 {
     ctx.update_from_iter(b"\x61\x62\x63\x64".iter())
   }
-  assert_eq!(
+  assert_eq(
     bytes_to_hex_string(ctx.finalize()),
     "debe9ff92275b8a138604889c18e5a4d6fdb70e5387e5765293dcba39c0c5732",
   )

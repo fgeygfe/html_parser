@@ -1,7 +1,7 @@
 // DOM tree parser module
 // Responsible for converting HTML tokens into a DOM tree structure
 
-/// DOM node type definition.
+///| DOM node type definition.
 /// Represents a node in the DOM tree, which can be an element, text, or comment.
 pub(all) enum DomNode {
   /// Element node, contains tag name and child nodes.
@@ -12,14 +12,14 @@ pub(all) enum DomNode {
   CommentNode(String)
 }
 
-/// Parser state for DOM construction.
+///| Parser state for DOM construction.
 /// Holds the token array and the current parsing position.
 priv struct DomParserState {
-  tokens: Array[@lexer.HtmlToken]  // Input token array
-  position: Int                    // Current parsing position
+  tokens : Array[@lexer.HtmlToken] // Input token array
+  position : Int // Current parsing position
 }
 
-/// Create a new DOM parser state from a token array.
+///| Create a new DOM parser state from a token array.
 /// Initializes the parser state at the beginning of the token list.
 /// 
 /// # Arguments
@@ -27,29 +27,29 @@ priv struct DomParserState {
 /// 
 /// # Returns
 /// A new DomParserState with position set to 0.
-fn new_dom_parser_state(tokens: Array[@lexer.HtmlToken]) -> DomParserState {
+fn new_dom_parser_state(tokens : Array[@lexer.HtmlToken]) -> DomParserState {
   { tokens, position: 0 }
 }
 
-/// Check if there are more tokens to process in the parser state.
+///| Check if there are more tokens to process in the parser state.
 /// 
 /// # Arguments
 /// * `state` - The current DomParserState.
 /// 
 /// # Returns
 /// True if there are more tokens, false otherwise.
-fn has_more_tokens(state: DomParserState) -> Bool {
+fn has_more_tokens(state : DomParserState) -> Bool {
   state.position < state.tokens.length()
 }
 
-/// Get the current token from the parser state.
+///| Get the current token from the parser state.
 /// 
 /// # Arguments
 /// * `state` - The current DomParserState.
 /// 
 /// # Returns
 /// The current HtmlToken if available, otherwise None.
-fn current_token(state: DomParserState) -> @lexer.HtmlToken? {
+fn current_token(state : DomParserState) -> @lexer.HtmlToken? {
   if has_more_tokens(state) {
     Some(state.tokens[state.position])
   } else {
@@ -57,30 +57,30 @@ fn current_token(state: DomParserState) -> @lexer.HtmlToken? {
   }
 }
 
-/// Advance the parser state to the next token.
+///| Advance the parser state to the next token.
 /// 
 /// # Arguments
 /// * `state` - The current DomParserState.
 /// 
 /// # Returns
 /// A new DomParserState with the position incremented by 1.
-fn advance_token(state: DomParserState) -> DomParserState {
+fn advance_token(state : DomParserState) -> DomParserState {
   { tokens: state.tokens, position: state.position + 1 }
 }
 
-/// Parse the DOM tree from a list of HTML tokens.
+///| Parse the DOM tree from a list of HTML tokens.
 /// 
 /// # Arguments
 /// * `tokens` - The array of HTML tokens to parse.
 /// 
 /// # Returns
 /// An array of DomNode representing the root nodes of the DOM tree.
-pub fn parse_dom(tokens: Array[@lexer.HtmlToken]) -> Array[DomNode] {
+pub fn parse_dom(tokens : Array[@lexer.HtmlToken]) -> Array[DomNode] {
   let state = new_dom_parser_state(tokens)
   parse_nodes(state).0
 }
 
-/// Parse a list of DOM nodes from the current parser state.
+///| Parse a list of DOM nodes from the current parser state.
 /// Continues parsing until no more tokens or an end tag is encountered.
 /// 
 /// # Arguments
@@ -88,10 +88,9 @@ pub fn parse_dom(tokens: Array[@lexer.HtmlToken]) -> Array[DomNode] {
 /// 
 /// # Returns
 /// A tuple containing the parsed nodes and the updated parser state.
-fn parse_nodes(state: DomParserState) -> (Array[DomNode], DomParserState) {
-  let nodes: Array[DomNode] = []
+fn parse_nodes(state : DomParserState) -> (Array[DomNode], DomParserState) {
+  let nodes = []
   let mut current_state = state
-  
   while has_more_tokens(current_state) {
     match current_token(current_state) {
       Some(StartTag(tag_name)) => {
@@ -115,18 +114,16 @@ fn parse_nodes(state: DomParserState) -> (Array[DomNode], DomParserState) {
         current_state = advance_token(current_state)
         nodes.push(CommentNode(content))
       }
-      Some(EndTag(_)) => {
+      Some(EndTag(_)) =>
         // Stop parsing current level when encountering an end tag
         break
-      }
       None => break
     }
   }
-  
   (nodes, current_state)
 }
 
-/// Parse child nodes for a given parent tag until the corresponding end tag is found.
+///| Parse child nodes for a given parent tag until the corresponding end tag is found.
 /// 
 /// # Arguments
 /// * `state` - The current DomParserState.
@@ -134,21 +131,22 @@ fn parse_nodes(state: DomParserState) -> (Array[DomNode], DomParserState) {
 /// 
 /// # Returns
 /// A tuple containing the parsed child nodes and the updated parser state.
-fn parse_children(state: DomParserState, parent_tag: String) -> (Array[DomNode], DomParserState) {
-  let children: Array[DomNode] = []
+fn parse_children(
+  state : DomParserState,
+  parent_tag : String,
+) -> (Array[DomNode], DomParserState) {
+  let children = []
   let mut current_state = state
-  
   while has_more_tokens(current_state) {
     match current_token(current_state) {
-      Some(EndTag(tag_name)) => {
+      Some(EndTag(tag_name)) =>
         if tag_name == parent_tag {
-          current_state = advance_token(current_state)  // Skip end tag
+          current_state = advance_token(current_state) // Skip end tag
           break
         } else {
           // Unmatched end tag, continue parsing
           current_state = advance_token(current_state)
         }
-      }
       Some(StartTag(tag_name)) => {
         current_state = advance_token(current_state)
         let (grandchildren, new_state) = parse_children(current_state, tag_name)
@@ -173,22 +171,21 @@ fn parse_children(state: DomParserState, parent_tag: String) -> (Array[DomNode],
       None => break
     }
   }
-  
   (children, current_state)
 }
 
-/// Print the DOM tree structure to the console.
+///| Print the DOM tree structure to the console.
 /// 
 /// # Arguments
 /// * `nodes` - The array of DomNode to print.
 /// 
 /// # Returns
 /// Unit. Prints the DOM tree to the standard output.
-pub fn print_dom_tree(nodes: Array[DomNode]) -> Unit {
+pub fn print_dom_tree(nodes : Array[DomNode]) -> Unit {
   print_dom_tree_with_indent(nodes, 0)
 }
 
-/// Print the DOM tree with indentation for better readability.
+///| Print the DOM tree with indentation for better readability.
 /// 
 /// # Arguments
 /// * `nodes` - The array of DomNode to print.
@@ -196,11 +193,9 @@ pub fn print_dom_tree(nodes: Array[DomNode]) -> Unit {
 /// 
 /// # Returns
 /// Unit. Prints the DOM tree to the standard output with indentation.
-fn print_dom_tree_with_indent(nodes: Array[DomNode], indent: Int) -> Unit {
+fn print_dom_tree_with_indent(nodes : Array[DomNode], indent : Int) -> Unit {
   let indent_str = "  ".repeat(indent)
-  
-  let mut i = 0
-  while i < nodes.length() {
+  for i in 0..<nodes.length() {
     match nodes[i] {
       Element(tag_name, children) => {
         println(indent_str + "📦 <" + tag_name + ">")
@@ -208,48 +203,38 @@ fn print_dom_tree_with_indent(nodes: Array[DomNode], indent: Int) -> Unit {
           print_dom_tree_with_indent(children, indent + 1)
         }
       }
-      TextNode(content) => {
-        println(indent_str + "📝 \"" + content + "\"")
-      }
-      CommentNode(content) => {
+      TextNode(content) => println(indent_str + "📝 \"" + content + "\"")
+      CommentNode(content) =>
         println(indent_str + "💬 <!-- " + content + " -->")
-      }
     }
-    i = i + 1
   }
 }
 
-/// Count all node types in the DOM tree, including elements, text nodes, and comments.
+///| Count all node types in the DOM tree, including elements, text nodes, and comments.
 /// 
 /// # Arguments
 /// * `nodes` - The array of DomNode to count.
 /// 
 /// # Returns
 /// A tuple (element_count, text_node_count, comment_count).
-pub fn count_all_nodes(nodes: Array[DomNode]) -> (Int, Int, Int) {
+pub fn count_all_nodes(nodes : Array[DomNode]) -> (Int, Int, Int) {
   let mut elements = 0
   let mut text_nodes = 0
   let mut comments = 0
-  
-  let mut i = 0
-  while i < nodes.length() {
+  for i in 0..<nodes.length() {
     match nodes[i] {
       Element(_, children) => {
         elements = elements + 1
-        let (child_elements, child_text, child_comments) = count_all_nodes(children)
+        let (child_elements, child_text, child_comments) = count_all_nodes(
+          children,
+        )
         elements = elements + child_elements
         text_nodes = text_nodes + child_text
         comments = comments + child_comments
       }
-      TextNode(_) => {
-        text_nodes = text_nodes + 1
-      }
-      CommentNode(_) => {
-        comments = comments + 1
-      }
+      TextNode(_) => text_nodes = text_nodes + 1
+      CommentNode(_) => comments = comments + 1
     }
-    i = i + 1
   }
-  
   (elements, text_nodes, comments)
 }
