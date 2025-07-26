@@ -1,2 +1,0 @@
-#!/bin/sh
-node /Users/Zhuanz2/html_parser/.mooncakes/moonbitlang/yacc/target/js/release/build/main/main.js "$@"

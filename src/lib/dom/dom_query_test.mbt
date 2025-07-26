@@ -1,3 +1,4 @@
+///|
 test "test_query_dom_by_tag_name" {
   let span1 = @parser.DomNode::Element("span", [])
   let span2 = @parser.DomNode::Element("span", [])
@@ -7,26 +8,25 @@ test "test_query_dom_by_tag_name" {
 
   // 查询所有 span 节点
   let result = query_dom_by_tag_name(nodes, "span")
-  assert_eq!(result.length(), 2)
-  match result[0] {
-    @parser.DomNode::Element(name, _) => assert_eq!(name, "span")
-    _ => assert_eq!(true, false)
+  assert_eq(result.length(), 2)
+  match result.get(0) {
+    Some(@parser.DomNode::Element(name, _)) => assert_eq(name, "span")
+    _ => abort("test_query_dom_by_tag_name failed")
   }
-  match result[1] {
-    @parser.DomNode::Element(name, _) => assert_eq!(name, "span")
-    _ => assert_eq!(true, false)
+  match result.get(1) {
+    Some(@parser.DomNode::Element(name, _)) => assert_eq(name, "span")
+    _ => abort("test_query_dom_by_tag_name failed")
   }
 
   // 查询 p 节点
   let result_p = query_dom_by_tag_name(nodes, "p")
-  assert_eq!(result_p.length(), 1)
-  match result_p[0] {
-    @parser.DomNode::Element(name, _) => assert_eq!(name, "p")
-    _ => assert_eq!(true, false)
+  assert_eq(result_p.length(), 1)
+  match result_p.get(0) {
+    Some(@parser.DomNode::Element(name, _)) => assert_eq(name, "p")
+    _ => abort("test_query_dom_by_tag_name failed")
   }
 
   // 查询不存在的标签
   let result_none = query_dom_by_tag_name(nodes, "ul")
-  assert_eq!(result_none.length(), 0)
+  assert_eq(result_none.length(), 0)
 }
-
