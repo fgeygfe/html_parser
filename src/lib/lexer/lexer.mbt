@@ -95,15 +95,8 @@ fn read_tag_name(state : TokenizerState) -> (String, TokenizerState) {
   let chars = []
   while true {
     match current_char(current_state) {
+      Some(c) if c is ('>' | '<' | '/' | ' ' | '\t' | '\n' | '\r') => break
       Some(c) => {
-        if c == '>' ||
-          c == '/' ||
-          c == ' ' ||
-          c == '\t' ||
-          c == '\n' ||
-          c == '\r' {
-          break
-        }
         chars.push(c)
         current_state = advance(current_state)
       }
