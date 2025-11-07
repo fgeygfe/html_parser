@@ -1,2 +1,4 @@
-.mooncakes
-target
+.mooncakes/
+target/
+src/lib/parser/parser.mbt
+src/lib/parser/parser.mbt.map.json

@@ -1,6 +1,14 @@
 {
   "is-main": false,
   "import": [
-    "html_parser/lib/lexer"
+    "html_parser/lib/ast"
+  ],
+  "pre-build": [
+    {
+      "command": "node $mod_dir/.mooncakes/moonbitlang/yacc/boot/moonyacc.cjs $input --input-mode pull -o $output",
+      "input": "parser.mbty",
+      "output": "parser.mbt"
+    }
   ]
 }
+

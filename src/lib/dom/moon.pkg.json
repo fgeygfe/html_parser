@@ -1,8 +1,6 @@
 {
-  "is-main": false,
   "import": [
-    "html_parser/lib/parser"
-  ],
-  "warn-list": "-28"
+    "html_parser/lib/ast"
+  ]
 }
 

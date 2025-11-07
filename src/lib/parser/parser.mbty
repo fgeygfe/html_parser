@@ -1,0 +1,117 @@
+// HTML Parser using MoonYacc
+// This parser can parse basic HTML structure with tags, attributes, and text content
+
+%derive<Show> Token
+%derive<Show> ParseError
+%position<Int>
+%start html_document
+
+// Tokens
+%token EOF
+%token<String> TAG_NAME          // e.g., "div", "span", "p"
+%token<String> TEXT              // Text content
+%token<String> ATTR_NAME         // Attribute name
+%token<String> ATTR_VALUE        // Attribute value (unquoted)
+%token<String> ATTR_VALUE_QUOTED // Attribute value (quoted)
+%token LANGLE                     "<"
+%token RANGLE                     ">"
+%token SLASH                      "/"
+%token EQUAL                      "="
+%token QUOTE                      "\"
+%token SELF_CLOSE                 "/>"
+%token CLOSE_TAG_START            "</"
+
+// Type definitions - using simple types for demonstration
+// In practice, you would define these in a separate module
+%type<Array[@ast.Node]> html_document
+%type<@ast.Node> element
+%type<@ast.Node> tag_element
+%type<Array[@ast.Node]> element_list
+%type<@ast.Attribute> attribute
+%type<Array[@ast.Attribute]> attribute_list
+%type<String> text_content
+
+%%
+
+html_document
+  : element html_document            { [$1] + $2 }
+  | element EOF                      { [$1] }
+  | EOF                              { [] }
+  ;
+
+element
+  : tag_element                     { $1 }
+  | text_content                    { @ast.Text($1) }
+  ;
+
+tag_element
+  // Opening tag with attributes and closing tag
+  : LANGLE TAG_NAME attribute_list RANGLE element_list CLOSE_TAG_START TAG_NAME RANGLE
+    { @ast.Element({ tag: $2, attrs: $3, children: $5 }) }
+  // Self-closing tag with attributes
+  | LANGLE TAG_NAME attribute_list SELF_CLOSE
+    { @ast.Element({ tag: $2, attrs: $3, children: [] }) }
+  // Opening tag without attributes and closing tag
+  | LANGLE TAG_NAME RANGLE element_list CLOSE_TAG_START TAG_NAME RANGLE
+    { @ast.Element({ tag: $2, attrs: [], children: $4 }) }
+  // Self-closing tag without attributes
+  | LANGLE TAG_NAME SELF_CLOSE
+    { @ast.Element({ tag: $2, attrs: [], children: [] }) }
+  ;
+
+element_list
+  : element element_list             { [$1] + $2 }
+  | element                          { [$1] }
+  |                                  { [] }
+  ;
+
+attribute_list
+  : attribute attribute_list        { [$1] + $2 }
+  | attribute                       { [$1] }
+  |                                 { [] }
+  ;
+
+attribute
+  // Attribute with quoted value: name="value"
+  : ATTR_NAME EQUAL QUOTE ATTR_VALUE_QUOTED QUOTE
+    { { name: $1, value: $4 } }
+  // Attribute with unquoted value: name=value
+  | ATTR_NAME EQUAL ATTR_VALUE
+    { { name: $1, value: $3 } }
+  // Boolean attribute: name
+  | ATTR_NAME
+    { { name: $1, value: "" } }
+  ;
+
+text_content
+  : TEXT                            { $1 }
+  ;
+
+%%
+
+// Footer code
+// Note: The HTML AST types (Node, Element, Attribute)
+// should be defined in a separate module file (e.g., html.mbt)
+//
+// Example structure:
+//
+// pub enum Node {
+//   Element(Element)
+//   Text(String)
+// }
+//
+// pub struct Element {
+//   tag : String
+//   attrs : Array[Attribute]
+//   children : Array[Node]
+// }
+//
+// pub struct Attribute {
+//   name : String
+//   value : String
+// }
+
+fn init {
+  ()
+}
+

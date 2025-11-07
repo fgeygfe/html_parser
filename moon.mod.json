@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "deps": {},
   "bin-deps": {
-    "moonbitlang/yacc": "0.6.7"
+    "moonbitlang/yacc": "0.7.2"
   },
   "readme": "README.md",
   "repository": "",
   "license": "Apache-2.0",
   "keywords": [],
   "description": "",
-  "source": "src"
+  "source": "src",
+  "examples": "examples"
 }
