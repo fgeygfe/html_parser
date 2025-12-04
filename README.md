@@ -9,6 +9,7 @@
 
 - 🚀 **完整的 HTML 解析** - 支持标准 HTML 标签、属性和文本内容
 - 🔧 **基于 MoonYacc** - 使用 LR 语法分析器生成器构建
+- ⚡ **基于 MoonLex** - 使用 moonlex 词法分析器生成器，高效且易维护
 - 🌳 **AST 生成** - 将 HTML 解析为抽象语法树（Abstract Syntax Tree）
 - ✅ **全面测试** - 包含 15+ 个测试用例，覆盖各种 HTML 结构
 - 📦 **模块化设计** - 清晰的分层架构（Lexer、Parser、AST）
@@ -37,7 +38,8 @@ html_parser/
 │   │   │   ├── ast.mbt       # AST 数据结构
 │   │   │   └── moon.pkg.json
 │   │   ├── lexer/            # 词法分析器
-│   │   │   ├── lexer.mbt     # Token 化逻辑
+│   │   │   ├── lexer.mbtx    # MoonLex 词法规则定义
+│   │   │   ├── lexer.mbt     # MoonLex 生成的代码
 │   │   │   └── moon.pkg.json
 │   │   └── parser/           # 语法分析器
 │   │       ├── parser.mbty   # MoonYacc 语法定义
@@ -172,7 +174,13 @@ Total tests: 15, passed: 15, failed: 0 ✅
 
 ### 词法分析器（Lexer）
 
-词法分析器负责将 HTML 字符串转换为 Token 流。
+词法分析器使用 [MoonLex](https://github.com/moonbitlang/ulex) 生成，负责将 HTML 字符串转换为 Token 流。
+
+**技术实现：**
+- 使用 `lexer.mbtx` 文件定义词法规则
+- MoonLex 自动生成高效的 DFA 状态机
+- 支持上下文相关的 token 识别（区分标签名和属性名）
+- 自动处理引号内的属性值
 
 **支持的 Token 类型：**
 
@@ -197,6 +205,8 @@ Token
 - `CLOSE_TAG_START` (`</`) 作为单个 token 处理，避免了 LR 解析器的 shift/reduce 冲突
 - 支持带引号和不带引号的属性值
 - 自动跳过标签间的空白字符
+- 使用状态机在 `tokenize` 函数中区分标签名和属性名（基于上下文）
+- 引号内的属性值通过特殊处理生成 `QUOTE ATTR_VALUE_QUOTED QUOTE` 序列
 
 ### 语法分析器（Parser）
 
@@ -484,11 +494,15 @@ fn main {
 
 ### 开发指南
 
-1. **修改语法规则**：编辑 `src/lib/parser/parser.mbty`
-2. **修改词法规则**：编辑 `src/lib/lexer/lexer.mbt`
+1. **修改语法规则**：编辑 `src/lib/parser/parser.mbty`，然后运行 `moon build` 重新生成 parser
+2. **修改词法规则**：编辑 `src/lib/lexer/lexer.mbtx`，MoonLex 会自动生成 `lexer.mbt` 文件
 3. **添加测试**：在 `src/test/parser_wbtest.mbt` 中添加测试用例
-4. **重新构建**：`moon build`
+4. **重新构建**：`moon build`（会自动运行 MoonLex 和 MoonYacc）
 5. **运行测试**：`moon test`
+
+**注意：** 
+- `lexer.mbt` 是自动生成的，不要手动编辑
+- 修改 `lexer.mbtx` 后，运行 `moon build` 会自动重新生成 `lexer.mbt`
 
 ## 🔮 未来计划
 
@@ -508,6 +522,7 @@ fn main {
 
 - [MoonBit](https://www.moonbitlang.com/) - 现代化的编程语言
 - [MoonYacc](https://github.com/moonbitlang/yacc) - LR 语法分析器生成器
+- [MoonLex](https://github.com/moonbitlang/ulex) - 词法分析器生成器
 
 ## 📞 联系方式
 

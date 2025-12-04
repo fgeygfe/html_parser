@@ -1,7 +1,15 @@
 {
   "is-main": false,
+  "pre-build": [
+    {
+      "command": "node /Users/Zhuanz2/repo/mbt/moonlex/boot/snapshot/moonlex.js $input -o $output",
+      "input": "lexer.mbtx",
+      "output": "lexer.mbt"
+    }
+  ],
   "import": [
-    "html_parser/lib/parser"
+    "html_parser/lib/parser",
+    "moonbitlang/ulex-runtime/lexbuf"
   ]
 }
 

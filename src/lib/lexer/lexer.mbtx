@@ -1,4 +1,4 @@
-
+{
 pub suberror LexError {
   EndOfInput
   UnexpectedEndOfFile
@@ -19,407 +19,94 @@ pub enum Token {
   SELF_CLOSE
   CLOSE_TAG_START
 } derive(Show)
+}
 
-
-fn[T : @lexbuf.IStringLexbuf] token(lexbuf : T) -> Token raise LexError  {
-  // The matched pattern id
-  let mut _match_pattern = @int.max_value
-  let mut _match_start = lexbuf.curr_pos()
-  let mut _match_end = -1
-  let mut _capture_0_start = -1
-  let mut _capture_0_end = -1
-  let mut _capture_1_start = -1
-  let mut _capture_1_end = -1
-  loop 0 {
-    0 => {
-      _match_pattern = 12
-      _match_end = lexbuf.curr_pos()
-      continue match lexbuf.next_as_int() {
-        0..=33 => 1
-        34 => 2
-        35..=38 => 1
-        39 => 3
-        40..=44 => 1
-        45..=46 => 4
-        47 => 5
-        48..=58 => 4
-        59 => 1
-        60 => 6
-        61 => 7
-        62 => 8
-        63..=64 => 1
-        65..=90 => 9
-        91 => 1
-        92 => 4
-        93..=94 => 1
-        95 => 4
-        96 => 1
-        97..=122 => 9
-        123..=1114111 => 1
-        _ => break
-      }
-    }
-    1 => {
-      _match_pattern = 10
-      _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
-      continue match lexbuf.next_as_int() {
-        0..=33 => 1
-        35..=38 => 1
-        40..=46 => 1
-        48..=59 => 1
-        63..=1114111 => 1
-        _ => break
-      }
-    }
-    2 => {
-      _match_pattern = 5
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    3 => {
-      _match_pattern = 6
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    4 => {
-      _match_pattern = 9
-      _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
-      continue match lexbuf.next_as_int() {
-        0..=33 => 1
-        35..=38 => 1
-        40..=44 => 1
-        45..=46 => 4
-        47 => 10
-        48..=58 => 4
-        59 => 1
-        63..=64 => 1
-        65..=90 => 4
-        91 => 1
-        92 => 4
-        93..=94 => 1
-        95 => 4
-        96 => 1
-        97..=122 => 4
-        123..=1114111 => 1
-        _ => break
-      }
-    }
-    5 => {
-      _match_pattern = 7
-      _match_end = lexbuf.curr_pos()
-      continue match lexbuf.next_as_int() {
-        45..=58 => 10
-        62 => 11
-        65..=90 => 10
-        92 => 10
-        95 => 10
-        97..=122 => 10
-        _ => break
-      }
-    }
-    6 => {
-      _match_pattern = 2
-      _match_end = lexbuf.curr_pos()
-      continue match lexbuf.next_as_int() {
-        47 => 12
-        _ => break
-      }
-    }
-    7 => {
-      _match_pattern = 4
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    8 => {
-      _match_pattern = 3
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    9 => {
-      _match_pattern = 8
-      _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
-      continue match lexbuf.next_as_int() {
-        0..=33 => 1
-        35..=38 => 1
-        40..=44 => 1
-        45 => 9
-        46 => 4
-        47 => 10
-        48..=58 => 9
-        59 => 1
-        63..=64 => 1
-        65..=90 => 9
-        91 => 1
-        92 => 4
-        93..=94 => 1
-        95 => 9
-        96 => 1
-        97..=122 => 9
-        123..=1114111 => 1
-        _ => break
-      }
-    }
-    10 => {
-      _match_pattern = 9
-      _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
-      continue match lexbuf.next_as_int() {
-        45..=58 => 10
-        65..=90 => 10
-        92 => 10
-        95 => 10
-        97..=122 => 10
-        _ => break
-      }
-    }
-    11 => {
-      _match_pattern = 1
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    12 => {
-      _match_pattern = 0
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    _ => panic()
-  }
-
-  guard _match_pattern <= 12 else {
-    // No pattern matched
-    panic()
-  }
-
-  lexbuf.reset(pos=_match_end)
-  match _match_pattern {
-    0 => {
-      ()
- CLOSE_TAG_START 
-    }
-    1 => {
-      ()
- SELF_CLOSE 
-    }
-    2 => {
-      ()
- LANGLE 
-    }
-    3 => {
-      ()
- RANGLE 
-    }
-    4 => {
-      ()
- EQUAL 
-    }
-    5 => {
-      ()
- QUOTE 
-    }
-    6 => {
-      ()
- QUOTE 
-    }
-    7 => {
-      ()
- SLASH 
-    }
-    8 => {
-      ()
-      let name = lexbuf.get_string(_capture_0_start, _capture_0_end)
-
+// 主 token 函数
+rule token[T : @lexbuf.IStringLexbuf](lexbuf : T) -> Token raise LexError {
+  parse {
+    // 结束标签开始 </（必须在 < 之前）
+    "</" => { CLOSE_TAG_START }
+    
+    // 自闭合标签 />（必须在 / 和 > 之前）
+    "/>" => { SELF_CLOSE }
+    
+    // 开始标签 <（必须在文本之前）
+    '<' => { LANGLE }
+    
+    // 结束标签 >
+    '>' => { RANGLE }
+    
+    // 等号
+    '=' => { EQUAL }
+    
+    // 引号（单独处理，在 tokenize 中处理引号内的内容）
+    ['"'] => { QUOTE }
+    ['\''] => { QUOTE }
+    
+    // 斜杠
+    '/' => { SLASH }
+    
+    // 标签名或属性名（字母开头，可包含字母、数字、-、_、:）
+    // 注意：必须在 TEXT 规则之前，以确保优先匹配
+    (['a'-'z' 'A'-'Z'] (['a'-'z' 'A'-'Z' '0'-'9' '-' '_' ':']*)) as name => {
       TAG_NAME(name)
-    
     }
-    9 => {
-      ()
-      let value = lexbuf.get_string(_capture_0_start, _capture_0_end)
-
+    
+    // 未引号的属性值（字母、数字、-、_、:、. 等字符序列）
+    (['a'-'z' 'A'-'Z' '0'-'9' '-' '_' ':' '.' '/' '\\']+) as value => {
       ATTR_VALUE(value)
-    
     }
-    10 => {
-      ()
-      let text = lexbuf.get_string(_capture_0_start, _capture_0_end)
- 
+    
+    // 文本内容（包含所有非标签字符，包括空白字符）
+    // 注意：不包含 < > = " ' / 等特殊字符
+    // 注意：由于 TAG_NAME 规则在前面，字母开头的序列会被优先匹配为 TAG_NAME
+    (_ \ ['<' '>' '=' '"' '\'' '/'])+ as text => { 
       TEXT(text) 
-    
     }
-    11 => {
-      ()
-      let c = lexbuf.get_char(_capture_0_start, _capture_0_end)
- 
+    
+    // 单个字符作为文本（包括空白字符）
+    _ as c => { 
       TEXT(String::make(1, c))
+    }
     
-    }
-    12 => {
-      ()
- EOF 
-    }
-    _ => panic()
+    // EOF
+    "" => { EOF }
   }
 }
 
-
-fn[T : @lexbuf.IStringLexbuf] read_quoted_value(buf : StringBuilder, lexbuf : T) -> Unit raise LexError  {
-  // The matched pattern id
-  let mut _match_pattern = @int.max_value
-  let mut _match_start = lexbuf.curr_pos()
-  let mut _match_end = -1
-  let mut _capture_0_start = -1
-  let mut _capture_0_end = -1
-  let mut _capture_1_start = -1
-  let mut _capture_1_end = -1
-  loop 0 {
-    0 => {
-      _match_pattern = 3
-      _match_end = lexbuf.curr_pos()
-      continue match lexbuf.next_as_int() {
-        0..=33 => 1
-        34 => 2
-        35..=1114111 => 1
-        _ => break
-      }
-    }
-    1 => {
-      _match_pattern = 1
-      _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
-      continue match lexbuf.next_as_int() {
-        0..=33 => 1
-        35..=1114111 => 1
-        _ => break
-      }
-    }
-    2 => {
-      _match_pattern = 0
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    _ => panic()
-  }
-
-  guard _match_pattern <= 3 else {
-    // No pattern matched
-    panic()
-  }
-
-  lexbuf.reset(pos=_match_end)
-  match _match_pattern {
-    0 => {
-      ()
- () 
-    }
-    1 => {
-      ()
-      let text = lexbuf.get_string(_capture_0_start, _capture_0_end)
-
+// 读取双引号内的属性值
+rule read_quoted_value[T : @lexbuf.IStringLexbuf](buf : StringBuilder, lexbuf : T) -> Unit raise LexError {
+  parse {
+    '"' => { () }
+    (_ \ ['"'])+ as text => {
       buf.write_string(text)
       read_quoted_value(buf, lexbuf)
-    
     }
-    2 => {
-      ()
-      let c = lexbuf.get_char(_capture_0_start, _capture_0_end)
-
+    _ as c => {
       buf.write_char(c)
       read_quoted_value(buf, lexbuf)
-    
     }
-    3 => {
-      ()
- raise(UnexpectedEndOfFile) 
-    }
-    _ => panic()
+    "" => { raise(UnexpectedEndOfFile) }
   }
 }
 
-
-fn[T : @lexbuf.IStringLexbuf] read_single_quoted_value(buf : StringBuilder, lexbuf : T) -> Unit raise LexError  {
-  // The matched pattern id
-  let mut _match_pattern = @int.max_value
-  let mut _match_start = lexbuf.curr_pos()
-  let mut _match_end = -1
-  let mut _capture_0_start = -1
-  let mut _capture_0_end = -1
-  let mut _capture_1_start = -1
-  let mut _capture_1_end = -1
-  loop 0 {
-    0 => {
-      _match_pattern = 3
-      _match_end = lexbuf.curr_pos()
-      continue match lexbuf.next_as_int() {
-        0..=38 => 1
-        39 => 2
-        40..=1114111 => 1
-        _ => break
-      }
-    }
-    1 => {
-      _match_pattern = 1
-      _match_end = lexbuf.curr_pos()
-      _capture_0_start = _match_start
-      _capture_0_end = _match_end
-      continue match lexbuf.next_as_int() {
-        0..=38 => 1
-        40..=1114111 => 1
-        _ => break
-      }
-    }
-    2 => {
-      _match_pattern = 0
-      _match_end = lexbuf.curr_pos()
-      break
-    }
-    _ => panic()
-  }
-
-  guard _match_pattern <= 3 else {
-    // No pattern matched
-    panic()
-  }
-
-  lexbuf.reset(pos=_match_end)
-  match _match_pattern {
-    0 => {
-      ()
- () 
-    }
-    1 => {
-      ()
-      let text = lexbuf.get_string(_capture_0_start, _capture_0_end)
-
+// 读取单引号内的属性值
+rule read_single_quoted_value[T : @lexbuf.IStringLexbuf](buf : StringBuilder, lexbuf : T) -> Unit raise LexError {
+  parse {
+    '\'' => { () }
+    (_ \ ['\''])+ as text => {
       buf.write_string(text)
       read_single_quoted_value(buf, lexbuf)
-    
     }
-    2 => {
-      ()
-      let c = lexbuf.get_char(_capture_0_start, _capture_0_end)
-
+    _ as c => {
       buf.write_char(c)
       read_single_quoted_value(buf, lexbuf)
-    
     }
-    3 => {
-      ()
- raise(UnexpectedEndOfFile) 
-    }
-    _ => panic()
+    "" => { raise(UnexpectedEndOfFile) }
   }
 }
 
-
-
-
+{
 ///|
 /// 将 lexer.Token 转换为 parser.Token
 ///|
@@ -649,4 +336,5 @@ pub fn tokenize(
   } else {
     tokens
   }
+}
 }
